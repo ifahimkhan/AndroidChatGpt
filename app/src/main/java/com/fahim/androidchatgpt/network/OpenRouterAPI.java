@@ -1,6 +1,6 @@
 package com.fahim.androidchatgpt.network;// OpenRouterAPI.java
-import com.fahim.geminiapistarter.model.ChatResponse;
-
+import com.fahim.androidchatgpt.model.ChatRequest;
+import com.fahim.androidchatgpt.model.ChatResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;

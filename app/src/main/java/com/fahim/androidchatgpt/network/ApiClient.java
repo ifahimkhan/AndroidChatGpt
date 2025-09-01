@@ -1,6 +1,8 @@
-package com.fahim.androidchatgpt.network;// ApiClient.java
+package com.fahim.androidchatgpt.network;
+
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -10,11 +12,13 @@ public class ApiClient {
 
     public static Retrofit getClient() {
         if (retrofit == null) {
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(logging)
+                    .connectTimeout(180, TimeUnit.SECONDS)
+                    .readTimeout(180, TimeUnit.SECONDS)
+//                .addInterceptor(logging)
                 .build();
 
             retrofit = new Retrofit.Builder()
