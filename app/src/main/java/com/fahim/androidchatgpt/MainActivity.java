@@ -1,6 +1,7 @@
 package com.fahim.androidchatgpt;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -44,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        apiService = ApiClient.getOpenRouterAPI();
         promptEditText = findViewById(R.id.promptEditText);
         submitPromptButton = findViewById(R.id.sendButton);
         responseTextView = findViewById(R.id.displayTextView);
         progressBar = findViewById(R.id.progressBar);
-        apiService = ApiClient.getOpenRouterAPI();
         submitPromptButton.setOnClickListener(v -> {
             String prompt = promptEditText.getText().toString();
             if (!prompt.isEmpty()) {
@@ -56,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
                 submitPromptButton.setEnabled(false);
                 ArrayList<Message> messageArrayList = new ArrayList<>();
                 messageArrayList.add(new Message("user", prompt));
-                ChatRequest promptRequest = new ChatRequest("openai/gpt-oss-120b:free", messageArrayList);
+                ChatRequest promptRequest = new ChatRequest(ApiClient.MODEL_NAME, messageArrayList);
 
+                Log.e(TAG, ": "+BuildConfig.API_KEY);
                 apiService.sendChatRequest(BuildConfig.API_KEY, "application/json", promptRequest).enqueue(new Callback<ChatResponse>() {
                     @Override
                     public void onResponse(Call<ChatResponse> call, Response<ChatResponse> response) {

@@ -8,17 +8,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String BASE_URL = "https://openrouter.ai/api/v1/";
+    public static final String MODEL_NAME = "openai/gpt-oss-120b:free";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
         if (retrofit == null) {
-//            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
             OkHttpClient client = new OkHttpClient.Builder()
                     .connectTimeout(180, TimeUnit.SECONDS)
                     .readTimeout(180, TimeUnit.SECONDS)
-//                .addInterceptor(logging)
                 .build();
 
             retrofit = new Retrofit.Builder()
