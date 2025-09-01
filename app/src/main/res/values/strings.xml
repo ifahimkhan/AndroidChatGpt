@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AndroidChatGpt</string>
+    <string name="enter_your_prompt_here">Enter your prompt here</string>
+    <string name="response">Response will be displayed here!\n</string>
+    <string name="field_cannot_be_empty">Field cannot be empty</string>
+    <string name="aistring">**Artificial Intelligence (AI)**</string>
+</resources>
